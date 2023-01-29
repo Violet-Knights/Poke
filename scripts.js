@@ -61,20 +61,24 @@ let fairyOff = new offTypes([pois,stl,fire],    [fght,dgn,drk],     []);
 let allOffTypes = [fireOff, waterOff, grassOff, normalOff, fightOff, flyingOff, poisonOff, groundOff, rockOff, bugOff, ghostOff, steelOff, electricOff, psychicOff, iceOff, dragonOff, darkOff, fairyOff];
 
 
-let selecType = iceOff;
+let selecType;
 let type1;
 let type2;
 
 function checkDef() {
     //reset and collect the defensive typings
-    let effec = 1;
+    
     type1 = document.getElementById("type1").value;
     type2 = document.getElementById("type2").value;
 
-    //checks the type
+    //Cycles all offensive types
     for (let z in allOffTypes) {
+        let effec = 1;
+        // Cycles through the ineff, supeff, and no eff
         for ( let x in allOffTypes[z]){
+            // cycles through the types in the eff array
             for (let y in allOffTypes[z][x]){
+                //checks if its effec
                 if (allOffTypes[z][x][y].type == type1 || allOffTypes[z][x][y].type == type2){
                     if(x == "inEff"){
                         effec*= 0.5;
@@ -86,15 +90,18 @@ function checkDef() {
                         effec*= 0;
                     }   
                 }   
+            
             }
+            
         }
+        //Stores the effec num in the obj
         allOffTypes[z].eff = effec;
-        console.log(allOffTypes[z].eff);
     }
 
 
 
-    // document.getElementById("test").innerHTML = effec;
+    // document.getElementById("test").innerHTML = ;
+
 }
 
 
