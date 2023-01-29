@@ -72,10 +72,10 @@ function checkDef() {
     type2 = document.getElementById("type2").value;
 
     //checks the type
-    // for (let selecType in allOffTypes)
-        for ( let x in selecType){
-            for (let y in selecType[x]){
-                if (selecType[x][y].type == type1 || selecType[x][y].type == type2){
+    for (let z in allOffTypes) {
+        for ( let x in allOffTypes[z]){
+            for (let y in allOffTypes[z][x]){
+                if (allOffTypes[z][x][y].type == type1 || allOffTypes[z][x][y].type == type2){
                     if(x == "inEff"){
                         effec*= 0.5;
                     }
@@ -84,14 +84,17 @@ function checkDef() {
                     }
                     else if(x == "noEff"){
                         effec*= 0;
-                    }
-                    
-                }
-                
+                    }   
+                }   
             }
-            
         }
-    document.getElementById("test").innerHTML = effec;
+        allOffTypes[z].eff = effec;
+        console.log(allOffTypes[z].eff);
+    }
+
+
+
+    // document.getElementById("test").innerHTML = effec;
 }
 
 
