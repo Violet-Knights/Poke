@@ -1,3 +1,5 @@
+
+//Class for offensive type matchups
 class offTypes {
     constructor(inEff, supEff, noEff){
         this.inEff = inEff;
@@ -5,26 +7,34 @@ class offTypes {
         this.noEff = noEff;
     }
 }
+//Class for tracking the type match up
+class typeCounter {
+    constructor(type, eff){
+        this.type = type;
+        this.eff = eff;
+    }
+}
 
-let norm = "normal";
-let fght = "fighting";
-let fly = "flying";
-let pois = "poison";
-let grnd = "ground";
-let rck = "rock";
-let bug = "bug";
-let ghst = "ghost";
-let stl = "steel";
-let fire = "fire";
-let wtr = "water";
-let grs = "grass";
-let elec = "electric";
-let psy = "psychic";
-let ice = "ice";
-let dgn = "dragon";
-let drk = "dark";
-let fay = "fairy";
-let none = "none"
+//for easier varibles for the types
+let norm = new typeCounter("normal", 1);
+let fght = new typeCounter("fighting", 1);
+let fly = new typeCounter("flying", 1);
+let pois = new typeCounter("poison", 1);
+let grnd = new typeCounter("ground", 1);
+let rck = new typeCounter("rock", 1);
+let bug = new typeCounter("bug", 1);
+let ghst = new typeCounter("ghost", 1);
+let stl = new typeCounter("steel", 1);
+let fire = new typeCounter("fire", 1);
+let wtr = new typeCounter("water", 1);
+let grs = new typeCounter("grass", 1);
+let elec = new typeCounter("electric", 1);
+let psy = new typeCounter("psychic", 1);
+let ice = new typeCounter("ice", 1);
+let dgn = new typeCounter("dragon", 1);
+let drk = new typeCounter("dark", 1);
+let fay = new typeCounter("fairy", 1);
+let none = new typeCounter("none", 1);
 
 
 //Offesive matchups
@@ -47,41 +57,51 @@ let dragonOff = new offTypes([stl],     [dgn],     [fay]);
 let darkOff = new offTypes([fght, drk, fay],     [ghst,psy],     []);
 let fairyOff = new offTypes([pois,stl,fire],    [fght,dgn,drk],     []);
 
+//Every Type in one array
+let allOffTypes = [fireOff, waterOff, grassOff, normalOff, fightOff, flyingOff, poisonOff, groundOff, rockOff, bugOff, ghostOff, steelOff, electricOff, psychicOff, iceOff, dragonOff, darkOff, fairyOff];
 
 
-let typeOne = grs;
-let typeTwo = drk;
-let effec = 1;
+let selecType = iceOff;
+let type1;
+let type2;
 
-function checkDef(type1, type2, otype) {
-
-    // console.log(otype.inEff);
+function checkDef() {
+    //reset and collect the defensive typings
+    let effec = 1;
+    type1 = document.getElementById("type1").value;
+    type2 = document.getElementById("type2").value;
 
     //checks the type
-    for ( let x in otype){
-        
-        // console.log(x + " " + otype[x]);
-       for (let y in otype[x]){
-            // console.log(y + " " + otype[x][y] + " " + x);
-            if (otype[x][y] == type1 || otype[x][y] == type2){
-                // console.log(x + " " + y);
-                if(x == "inEff"){
-                    effec*= 0.5;
+    // for (let selecType in allOffTypes)
+        for ( let x in selecType){
+            for (let y in selecType[x]){
+                if (selecType[x][y].type == type1 || selecType[x][y].type == type2){
+                    if(x == "inEff"){
+                        effec*= 0.5;
+                    }
+                    else if(x == "supEff"){
+                        effec*= 2;
+                    }
+                    else if(x == "noEff"){
+                        effec*= 0;
+                    }
+                    
                 }
-                else if(x == "supEff"){
-                    effec*= 2
-                }
-                else if(x == "noEff"){
-                    effec*= 0;
-                }
+                
             }
-       }
-
-    }
-
-
+            
+        }
+    document.getElementById("test").innerHTML = effec;
 }
 
-checkDef(typeOne, typeTwo, ghostOff);
 
-document.getElementById("test").innerHTML = effec;
+    // 
+
+
+function testing() {
+    console.log("working");
+}
+
+
+
+document.getElementById("calc").addEventListener("click", checkDef);
